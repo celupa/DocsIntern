@@ -1,9 +1,6 @@
 import random
-from datetime import datetime
-import numpy as np
 import pandas as pd
 from scipy.spatial.distance import cosine
-import chromadb
 from helpers.model_selector import ModelSelector
 from helpers.rag_handler import RAGHandler
 from helpers import custom_functions as cfoos

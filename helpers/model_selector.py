@@ -3,7 +3,6 @@ import sys
 import traceback
 import gc
 import re
-from datetime import datetime
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from sentence_transformers import SentenceTransformer

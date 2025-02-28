@@ -1,10 +1,9 @@
 import socket
 import pickle
-import sys
-import traceback
 import shutil
 from pathlib import Path
 from datetime import datetime
+import traceback
 import fitz
 import chromadb
 from chromadb.config import Settings
@@ -29,15 +28,16 @@ class RAGHandler():
             self.db_path = db_path
             self.supported_extensions = supported_extensions
             self.data_path = self.check_data_folder(data_path, self.supported_extensions)
-            self.data = self.data_path
+            self.data = None
             cfoos.check_create_dir(self.db_path)
-            self.client = chromadb.PersistentClient(
-                path=str(self.db_path),
-                settings=Settings(allow_reset=True)
-                )
-            self.collection_config = collection_config
-            self.collection_name = collection_name
-            self.collection = self.client.get_or_create_collection(self.collection_name)
+            if data_path != "None":
+                self.client = chromadb.PersistentClient(
+                    path=str(self.db_path),
+                    settings=Settings(allow_reset=True)
+                    )
+                self.collection_config = collection_config
+                self.collection_name = collection_name
+                self.collection = self.client.get_or_create_collection(self.collection_name)
             self.device = model.device
             self.emb_model = model.get_emb_model()
             # tuning config
@@ -51,11 +51,9 @@ class RAGHandler():
             self.chunk_overlap = None
             # print(f"---{datetime.now()} | Initialized database with source: {self.data_path}")
             cfoos.LOG.info(f"Initialized database with source: {self.data_path}")
-        except ValueError:
-            raise
         except Exception:
             # print(f"---{datetime.now()} | Failed to initialize database. Verify config file")
-            cfoos.LOG.info(f"Failed to initialize database. Verify config file")
+            cfoos.LOG.info(f"Failed to initialize database. Verify config")
 
     @staticmethod
     def check_data_folder(path, supported_extensions: list) -> Path:
@@ -65,7 +63,7 @@ class RAGHandler():
             for file in data_path.rglob("*"):
                 if file.suffix.lstrip(".") in supported_extensions:
                     return data_path
-        raise ValueError(f"---{datetime.now()} | Data Path must point to an existing folder containing valid files.")
+        return "None"
 
     def get_doc_repr(
             self,
@@ -85,14 +83,6 @@ class RAGHandler():
             "machine": socket.gethostname()
             }
         return doc_repr
-
-    # TODO: this may run into problems if there's not enoug memory. find alternative
-    # def summarize_text(self, app_model: str, content: str) -> str:
-    #     content_summary = app_model.prompt_llm(f"""Summarize the following content within max 250 characters.
-    #                                            Summary must be in English.
-    #                                            Output only the summary: {content}""", singleton=True)
-    #     app_model.messages = []
-    #     return content_summary
 
     # TODO: eww... temporary until implementing a more elegant solution
     def reset_db_folder(self) -> None:
@@ -135,8 +125,6 @@ class RAGHandler():
                         except:
                             with open(file_path, "r", encoding="utf-8") as f:
                                 content = f.read()
-                        # if app_model.device == "cuda" and summarize:
-                        #   content_summary = summarize_text(app_model, content)
                         # store metadata and content
                         data.append(self.get_doc_repr(file_path, content))
         if save_metadata:
@@ -147,7 +135,7 @@ class RAGHandler():
                 pickle.dump(data, f)
         # store parsed path for reference
         with open("init_config.txt", "w") as f:
-            f.write(str(self.data_path)) 
+            f.write(str(self.data_path))
         self.data = data
         return data
 
