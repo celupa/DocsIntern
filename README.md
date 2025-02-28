@@ -28,7 +28,7 @@ The purpose of the app is to run both on GPU and CPU, but with some limitations 
 I can't afford the subscription culture to dry up the treasury. As a result, the installation may be a little hacky.
 Hosting a ~10 GB application is not free. Therefore, the app's **OneDrive** folder contains the necessary files to install and run the app locally.
 The OneDrive source has been stripped of unecessary files (README, tests...) but bundles the **quant_models** and the **sample_data** together.
-The rational is to have something that's usable out of the box (quantized models and vectorizer) outside the environment set-up.
+The rational is to have something that's usable out of the box (quantized models and vectorizer) excluding download and dependencies.
 
 * Download the zip file from OneDrive:
 * Use the extracted folder as development container. Folder must have the following static name *DocsIntern*
