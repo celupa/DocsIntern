@@ -26,9 +26,14 @@ The purpose of the app is to run both on GPU and CPU, but with some limitations 
 
 ## Installation
 I can't afford the subscription culture to dry up the treasury. As a result, the installation may be a little hacky.
-Hosting a ~10 GB application is not free. Therefore, the app's OneDrive folder contains the necessary files to install and run the app.
-The OneDrive source has been stripped of unecessary files (README, tests...) but bundles the models.
+Hosting a ~10 GB application is not free. Therefore, the app's **OneDrive** folder contains the necessary files to install and run the app.
+The OneDrive source has been stripped of unecessary files (README, tests...) but bundles the models together.
 The rational is to have something that's usable out of the box (quantized models and vectorizer) outside the environment set-up.
+
+* Download the zip file from OneDrive:
+* Extract the contents into a folder named *DocsIntern*
+* Install the dependencies
+* Run app.py
 <br/>
 
 ## Models, Requirements & Limitations
