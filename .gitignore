@@ -1,3 +1,18 @@
+# specific files
+db/
+doc_folder/
+docs/
+helpers/cli.txt
+hf/.locks
+hf/models*
+quant_models/
+samples_data/
+init_config.txt
+*.pkl
+*.csv
+*.parquet
+*.log
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
