@@ -17,12 +17,10 @@ from helpers import custom_functions as cfoos
 LOG_BUFFER = io.StringIO()
 stream_handler = logging.StreamHandler(LOG_BUFFER)
 cfoos._set_log_stream(cfoos.LOG, stream_handler)
-# prepare a separate thread to timeout error coming from gradio 
+# prepare a separate thread to timeout error coming from gradio
 EXECUTOR = ThreadPoolExecutor()
 # preconfigure app
 MODEL_SELECTOR = ModelSelector(c.MODEL_CONFIG)
-# LOG = cfoos.get_log()
-# MODEL_SELECTOR = ModelSelector(c.MODEL_CONFIG)
 RAG_HANDLER = None
 FLOW_HANDLER = None
 
@@ -126,13 +124,21 @@ def interaction_off(*args: str) -> None:
 
 def validate_path(data_path=None, tune: str=None) -> Tuple[dict, dict]:
     """Validate data path and control app flow."""
+    global PARSING_STATUS
+    path_warning = "HEY! Data path must exist and contain valid files!"
     try:
+        if not Path(data_path).exists():
+            data_path = gr.update(label=path_warning, value="")
+            return data_path
+        PARSING_STATUS = "working"
         future = EXECUTOR.submit(prime_flow, data_path, tune)
         future.result()
         data_path = gr.update(label="Data Path", value="")
+        PARSING_STATUS = "done"
         return data_path
     except ValueError:
-        data_path = gr.update(label="HEY! Data path must exist and contain valid files!", value="")
+        PARSING_STATUS = "done"
+        data_path = gr.update(label=path_warning, value="")
         return data_path
 
 def chat(prompt, history):
