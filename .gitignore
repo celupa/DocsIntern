@@ -6,7 +6,7 @@ helpers/cli.txt
 hf/.locks
 hf/models*
 quant_models/
-samples_data/
+sample_data/
 init_config.txt
 *.pkl
 *.csv
