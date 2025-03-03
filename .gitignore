@@ -13,6 +13,7 @@ init_config.txt
 *.csv
 *.parquet
 *.log
+fullenv.yml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
