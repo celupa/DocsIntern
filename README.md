@@ -5,7 +5,7 @@
 * **Installation**: 
     * clone repo
     * install dependencies (env.yml)
-    * download models from Google Drive and place them into the folder **quant_models**: 
+    * download models from Google Drive and place them into the folder **quant_models**: https://drive.google.com/file/d/1fT0ZcRXRamSDIT1saJWWvl5fYDHoDacL/view?usp=drive_link
     * run app.py to launch a localhost UI
 * **Usage**: paste documents folder path, opt for tuning (may take a long time depending on data size), and chat
 * **Prompt**: prefixing a message with "db:" will initiate RAG; otherwise, the app engages in free chat with the LLM
@@ -30,11 +30,12 @@ The purpose of the app is to run both on GPU and CPU, but with some limitations 
 
 ## Installation
 The rational is to have something that's usable *out of the box* (quantized models and vectorizer) excluding model download and dependencies installs.
+I.E, not bother with HuggingFace setup and Llama terms of service.
 I can't afford the subscription culture to dry up the treasury. As a result, the installation may be a bit hacky.
-The app is hosted on GIT but models are hosted on **Google Drive**.
+The app is hosted on GIT but the models are hosted on **Google Drive**.
 
 * clone repo
-* download models from Google Drive and place them into the folder **quant_models**
+* download models from Google Drive and place them into the folder **quant_models**: https://drive.google.com/file/d/1fT0ZcRXRamSDIT1saJWWvl5fYDHoDacL/view?usp=drive_link
 * install dependencies with *env.yml*
 * the project name should not be changed (keep it *DocsIntern*)
 * run *app.py* to launch Gradio in localhost
@@ -116,7 +117,7 @@ I'll assume the LLM had a bad day and its response was not a direct effect of th
 
 ---
 
-The app was originally planned to include additional features and be packaged for distribution, but halfway through building it I stumbled upon VLMs.
+The app was originally planned to include additional features, be packaged for distribution, and aimed at less technical public but halfway through building it I stumbled upon VLMs.
 Visual Language Models have come a long way and seem to offer more flexiblity.
 Additionally, the constraints of running on CPU significantly limited performance and usability.
 As a result, I've decided to archive this project.
