@@ -2,6 +2,7 @@ from typing import Tuple
 from pathlib import Path
 import io
 import logging
+import re
 from concurrent.futures import ThreadPoolExecutor
 import gradio as gr
 from helpers import cfg as c
@@ -103,7 +104,7 @@ def prime_flow(data_path: str=None, tune: str=None) -> None:
     else:
         RAG_HANDLER = RAGHandler(
             db_path=c.DB_PATH,
-            data_path=None,
+            data_path="None",
             supported_extensions=c.SUPPORTED_EXTENSIONS,
             collection_config=c.COLLECTION_CONFIG,
             collection_name=c.DB_COLLECTION,
@@ -122,11 +123,25 @@ def interaction_off(*args: str) -> None:
     """Turn widget interaction off."""
     return [gr.update(interactive=False) for _ in range(len(args))]
 
+def format_path(text: str) -> str | None:
+    # format linux/mac path
+    linux_mac_regex = r'/[^\s:*?"<>|]+'  
+    # format windows paths
+    windows_regex = r'[a-zA-Z]:\\[^\s:*?"<>|]+' 
+    # format unc network path
+    unc_regex = r'\\\\[^\s:*?"<>|]+'  
+    pattern = f"({linux_mac_regex})|({windows_regex})|({unc_regex})"
+    match = re.search(pattern, text)
+    if match:
+        return next(filter(None, match.groups())) 
+    return None
+
 def validate_path(data_path=None, tune: str=None) -> Tuple[dict, dict]:
     """Validate data path and control app flow."""
     global PARSING_STATUS
-    path_warning = "HEY! Data path must exist and contain valid files!"
+    path_warning = "Hey, you! Please check the provided path exists, contains valid files and is formatted correctly..."
     try:
+        data_path = format_path(data_path)
         if not Path(data_path).exists():
             data_path = gr.update(label=path_warning, value="")
             return data_path

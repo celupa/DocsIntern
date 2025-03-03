@@ -3,7 +3,8 @@ import pickle
 import shutil
 from pathlib import Path
 from datetime import datetime
-import traceback
+import gc
+import time
 import fitz
 import chromadb
 from chromadb.config import Settings
@@ -84,14 +85,22 @@ class RAGHandler():
             }
         return doc_repr
 
-    # TODO: eww... temporary until implementing a more elegant solution
+   # TODO: eww... temporary until implementing a more elegant solution
     def reset_db_folder(self) -> None:
         """Reset db folder"""
         if self.db_path.exists():
+            self.client.delete_collection(self.collection_name)
             self.client.reset()
             self.client.clear_system_cache()
+            del self.client
             self.client = None
-            shutil.rmtree(self.db_path)
+            # windows fails to delete opened files because of background process (x: antivirus) 
+            # even when we closed the connection. Thus the inclusion of ignore_errors
+            # this issues only happens on windows because of the zombie handles
+            # since we deleted the collection and reset db, we should be fine
+            gc.collect()
+            time.sleep(1)
+            shutil.rmtree(self.db_path, ignore_errors=True)
         # print(f"---{datetime.now()} | Reset DB")
         cfoos.LOG.info(f"Reset DB")
         cfoos.check_create_dir(self.db_path)

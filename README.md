@@ -1,9 +1,13 @@
 ## TL;DR
-* **Description**: local, agentic AI app assisting with user documentation
+* **Description**: local, agentic AI app assisting with private documentation
 * **Hardware**: can run on both GPU and CPU (heavily limited on the latter). Defaults to GPU if CUDA is available
-* **Requirements**: 8GB RAM on selected hardware (GPU or CPU) and 11 GB of memory 
-* **Installation**: download OneDrive files, install dependencies (env.yml) and run app.py
-* **Usage**: paste documents folder path in the UI, opt for tuning (may take a long time depending on data size), and chat
+* **Requirements**: 8GB RAM on selected hardware (GPU or CPU), 11 GB of memory and technical proficiency (or ask your favorite LLM)
+* **Installation**: 
+    * clone repo
+    * install dependencies (env.yml)
+    * download models from Google Drive and place them into the folder **quant_models**: 
+    * run app.py to launch a localhost UI
+* **Usage**: paste documents folder path, opt for tuning (may take a long time depending on data size), and chat
 * **Prompt**: prefixing a message with "db:" will initiate RAG; otherwise, the app engages in free chat with the LLM
 <br/>
 
@@ -17,23 +21,23 @@ The purpose of the app is to run both on GPU and CPU, but with some limitations 
 * **/helpers** contains various modules helping with app execution (custom functions, classes...)
     * *cfg.py* allows you to manipulate various configuration variables (database path, system prompt...)
 * **/hf** contains original HuggingFace models (excluded from project)
-* **/quant_models** contains quantized models (OneDrive)
-* **/sample_data** contains demo data (OneDrive, source: https://www.udemy.com/course/llm-engineering-master-ai-and-large-language-models)
+* **/quant_models** contains quantized models: Llama GGUF, Llama Instruct & Paraphrase Mini (Google Drive)
+* **/sample_data** contains demo data 
 * **/tests** contains tests for model evaluation, unit and integration tests
 * **/env.yml** contains environment
 * **app.py** main application file
 <br/>
 
 ## Installation
-I can't afford the subscription culture to dry up the treasury. As a result, the installation may be a little hacky.
-Hosting a ~10 GB application is not free. Therefore, the app's **OneDrive** folder contains the necessary files to install and run the app locally.
-The OneDrive source has been stripped of unecessary files (README, tests...) but bundles the **quant_models** and the **sample_data** together.
-The rational is to have something that's usable out of the box (quantized models and vectorizer) excluding download and dependencies.
+The rational is to have something that's usable *out of the box* (quantized models and vectorizer) excluding model download and dependencies installs.
+I can't afford the subscription culture to dry up the treasury. As a result, the installation may be a bit hacky.
+The app is hosted on GIT but models are hosted on **Google Drive**.
 
-* Download the zip file from OneDrive:
-* Use the extracted folder as development container. Folder must have the following static name *DocsIntern*
-* Install dependencies via *env.yml*
-* Run *app.py*
+* clone repo
+* download models from Google Drive and place them into the folder **quant_models**
+* install dependencies with *env.yml*
+* the project name should not be changed (keep it *DocsIntern*)
+* run *app.py* to launch Gradio in localhost
 <br/>
 
 ## Models, Requirements & Limitations
@@ -72,6 +76,7 @@ In practice, this means that running the app with the CPU model will be limited 
 The purpose of the app is to be applied across varied situations. 
 With this in mind, it hasn't been fine-tuned for any type of scenario and data pre-processing is missing.
 The app will run with the GPU model if it detects a CUDA set-up on the machine, otherwise it will use the CPU model. 
+Additionally it has been tested on Linux & Windows, but may also work on Mac.
 
 ![user interface](images/gradio_ui.png)
 The first section in the UI will ask for a data path, with the option to tune the configuration (speed vs performance).

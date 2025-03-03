@@ -5,8 +5,9 @@ docs/
 helpers/cli.txt
 hf/.locks
 hf/models*
-quant_models/
-sample_data/
+quant_models/Llama-3.1-8B-Instruct
+quant_models/Meta-Llama-3.1-8B-Instruct-GGUF
+quant_models/paraphrase-multilingual-MiniLM-L12-v2
 init_config.txt
 *.pkl
 *.csv
