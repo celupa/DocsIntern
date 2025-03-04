@@ -13,7 +13,7 @@ Since users have reported inconsistent outcomes between operating systems, the a
 * **Installation**: 
     * clone repo
     * install dependencies (env.yml)
-    * download models from Google Drive and place them into the folder **quant_models**: https://drive.google.com/file/d/1fT0ZcRXRamSDIT1saJWWvl5fYDHoDacL/view?usp=drive_link
+    * download models from Google Drive and place **quant_models** folder in the app folder: https://drive.google.com/file/d/1fT0ZcRXRamSDIT1saJWWvl5fYDHoDacL/view?usp=drive_link
     * run app.py to launch a localhost UI
 * **Usage**: 
     * provide path to documents folder
@@ -46,7 +46,7 @@ I can't afford the subscription culture to dry up the treasury. As a result, the
 The app is hosted on GIT but the models are hosted on **Google Drive**.
 
 * clone repo
-* download models from Google Drive and place them into the folder **quant_models**: https://drive.google.com/file/d/1fT0ZcRXRamSDIT1saJWWvl5fYDHoDacL/view?usp=drive_link
+* download the models from Google Drive and place the unzipped **quant_models** folder into the app folder: https://drive.google.com/file/d/1fT0ZcRXRamSDIT1saJWWvl5fYDHoDacL/view?usp=drive_link
 * install dependencies with *env.yml*
 * the project name should not be changed (keep it *DocsIntern*)
 * run *app.py* to launch Gradio in localhost
