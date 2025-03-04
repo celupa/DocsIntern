@@ -134,7 +134,7 @@ def format_path(text: str) -> str | None:
     match = re.search(pattern, text)
     if match:
         return next(filter(None, match.groups())) 
-    return None
+    return "None"
 
 def validate_path(data_path=None, tune: str=None) -> Tuple[dict, dict]:
     """Validate data path and control app flow."""
