@@ -1,6 +1,6 @@
 # UPDATE 040325
 Since, users have reported inconsistent outcomes between operating systems, the app has been currently setup to only run on Linux.
-<br\>
+<br/>
 
 ## TL;DR
 * **Description**: local, agentic AI app assisting with private documentation
