@@ -1,7 +1,14 @@
+# UPDATE 040325
+Since, users have reported inconsistent outcomes between operating systems, the app has been currently setup to only run on Linux.
+<br\>
+
 ## TL;DR
 * **Description**: local, agentic AI app assisting with private documentation
 * **Hardware**: can run on both GPU and CPU (heavily limited on the latter). Defaults to GPU if CUDA is available
-* **Requirements**: 8GB RAM on selected hardware (GPU or CPU), 11 GB of memory and technical proficiency (or ask your favorite LLM)
+* **Requirements**: 
+    * 8GB RAM on selected hardware (GPU or CPU)
+    * 11 GB of memory and technical proficiency (or ask your favorite LLM)
+    * CUDA 12.4 (PyTorch)
 * **Installation**: 
     * clone repo
     * install dependencies (env.yml)
@@ -77,7 +84,7 @@ In practice, this means that running the app with the CPU model will be limited 
 The purpose of the app is to be applied across varied situations. 
 With this in mind, it hasn't been fine-tuned for any type of scenario and data pre-processing is missing.
 The app will run with the GPU model if it detects a CUDA set-up on the machine, otherwise it will use the CPU model. 
-Additionally it has been tested on Linux & Windows, but may also work on Mac.
+Additionally it has been tested on Linux & Windows. May also work on MAC (CPU only).
 
 ![user interface](images/gradio_ui.png)
 The first section in the UI will ask for a data path, with the option to tune the configuration (speed vs performance).

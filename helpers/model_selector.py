@@ -12,7 +12,6 @@ from helpers import custom_functions as cfoos
 
 class ModelSelector():
     """Choses a model based on the available hardware (CPU/GPU)"""
-
     def __init__(self, model_config: dict, device: str=None):
         try:
             # instance variable
