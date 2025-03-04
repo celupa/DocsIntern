@@ -1,5 +1,5 @@
 # UPDATE 040325
-Since, users have reported inconsistent outcomes between operating systems, the app has been currently setup to only run on Linux.
+Since users have reported inconsistent outcomes between operating systems, the app has been currently setup to only run on Linux.
 <br/>
 
 ## TL;DR
@@ -7,15 +7,19 @@ Since, users have reported inconsistent outcomes between operating systems, the 
 * **Hardware**: can run on both GPU and CPU (heavily limited on the latter). Defaults to GPU if CUDA is available
 * **Requirements**: 
     * 8GB RAM on selected hardware (GPU or CPU)
-    * 11 GB of memory and technical proficiency (or ask your favorite LLM)
+    * 11 GB of memory
     * CUDA 12.4 (PyTorch)
+    * technical proficiency (or ask your favorite LLM)
 * **Installation**: 
     * clone repo
     * install dependencies (env.yml)
     * download models from Google Drive and place them into the folder **quant_models**: https://drive.google.com/file/d/1fT0ZcRXRamSDIT1saJWWvl5fYDHoDacL/view?usp=drive_link
     * run app.py to launch a localhost UI
-* **Usage**: paste documents folder path, opt for tuning (may take a long time depending on data size), and chat
-* **Prompt**: prefixing a message with "db:" will initiate RAG; otherwise, the app engages in free chat with the LLM
+* **Usage**: 
+    * provide path to documents folder
+    * opt for tuning (may take a long time depending on data size)
+    * chat
+* **Prompt**: prefixing a message with "db:" will initiate RAG; otherwise, engage in free chat with the LLM
 <br/>
 
 ## Overview
